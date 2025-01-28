@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ตัวอย่างที่ 17</title>
+  </head>
+  <body>
+    <h3>ฟอร์มตรวจสอบความถูกต้อง</h3>
+    <form onsubmit="validateForm(event)">
+      <label>อีเมล: <input type="email" id="email" required /></label><br />
+      <label>รหัสผ่าน: <input type="password" id="password" required /></label><br />
+      <label>ยืนยันรหัสผ่าน: <input type="password" id="confirmPassword" required /></label><br />
+      <button type="submit">ส่งข้อมูล</button>
+      <p id="formError" style="color: red"></p>
+    </form>
+    <script>
+      function validateForm(event) {
+        event.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        const errorElement = document.getElementById("formError");
+
+        if (password !== confirmPassword) {
+          errorElement.textContent = "รหัสผ่านไม่ตรงกัน";
+          return;
+        }
+
+        if (password.length < 6) {
+          errorElement.textContent = "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+          return;
+        }
+
+        errorElement.textContent = "ส่งข้อมูลสำเร็จ!";
+        errorElement.style.color = "green";
+      }
+    </script>
+  </body>
+</html>

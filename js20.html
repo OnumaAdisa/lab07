@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ตัวอย่างที่ 20</title>
+  </head>
+  <body>
+    <h3>รายการสิ่งที่ต้องทำ</h3>
+    <input type="text" id="todoInput" placeholder="เพิ่มรายการ..." />
+    <button onclick="addTodo()">เพิ่ม</button>
+    <ul id="todoList"></ul>
+    <script>
+      let todos = [];
+      function addTodo() {
+        const input = document.getElementById("todoInput").value.trim();
+        if (input) {
+          todos.push(input);
+          renderTodos();
+          document.getElementById("todoInput").value = "";
+        }
+      }
+      function renderTodos() {
+        const list = document.getElementById("todoList");
+        list.innerHTML = "";
+        todos.forEach((todo, index) => {
+          const li = document.createElement("li");
+          li.textContent = todo;
+          const deleteBtn = document.createElement("button");
+          deleteBtn.textContent = "ลบ";
+          deleteBtn.onclick = () => {
+            todos.splice(index, 1);
+            renderTodos();
+          };
+          li.appendChild(deleteBtn);
+          list.appendChild(li);
+        });
+      }
+    </script>
+  </body>
+</html>
